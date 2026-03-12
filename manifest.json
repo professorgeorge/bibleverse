@@ -1,0 +1,16 @@
+{
+  "name": "Quiet Space",
+  "short_name": "Quiet Space",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f0ebdf",
+  "theme_color": "#f0ebdf",
+  "description": "A pocket refuge for a gentle word of encouragement.",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

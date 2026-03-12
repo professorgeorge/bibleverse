@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quiet Space | A Pocket Refuge</title>
+    <meta name="description" content="A simple, private space to pause and receive a gentle word of encouragement.">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./css/main.css">
+    
+    <!-- PWA Meta tags -->
+    <meta name="theme-color" content="#f0ebdf">
+    <link rel="apple-touch-icon" href="./assets/icon.svg">
+    
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" class="app-container">
+        
+        <!-- ================= WELCOME SCREEN ================= -->
+        <div id="screen-welcome" class="screen">
+            <button id="btn-settings" class="btn-ghost" style="position: absolute; top: var(--sp-lg); right: var(--sp-lg); font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;">⚙</button>
+            <h1>Quiet Space</h1>
+            <p class="subtitle">A pocket refuge for a gentle word of encouragement.</p>
+            <div style="margin-top: var(--sp-2xl);">
+                <button id="btn-start" class="btn-primary">Take a breath</button>
+            </div>
+            <div style="margin-top: var(--sp-lg);">
+                <button id="btn-favorites" class="btn-ghost">View Favorites</button>
+            </div>
+        </div>
+
+        <!-- ================= CHECK-IN SCREEN ================= -->
+        <div id="screen-checkin" class="screen hidden">
+            <h2>How are you feeling?</h2>
+            <p class="subtitle">Select what you're carrying right now, or simply skip.</p>
+            
+            <div id="emotion-chips" class="chips-container">
+                <!-- Chips will be generated here -->
+            </div>
+
+            <div style="margin-top: var(--sp-xl); display: flex; flex-direction: column; gap: var(--sp-md); align-items: center;">
+                <button id="btn-continue" class="btn-primary">Continue</button>
+                <button id="btn-skip" class="btn-ghost">Skip check-in</button>
+            </div>
+        </div>
+
+        <!-- ================= PAUSE / MEDITATION SCREEN ================= -->
+        <div id="screen-pause" class="screen hidden">
+            <h2 id="pause-text" style="animation: pulse 3s infinite ease-in-out;">Be still...</h2>
+            <div class="breathing-circle"></div>
+        </div>
+
+        <!-- ================= SHUFFLE / DRAW SCREEN ================= -->
+        <div id="screen-shuffle" class="screen hidden">
+            <h2>A word for you.</h2>
+            <p class="subtitle">Tap the card to reveal.</p>
+            
+            <div id="btn-draw" class="draw-card">
+                <div class="card-inner">
+                    <span class="card-icon">✧</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= RESULT SCREEN ================= -->
+        <div id="screen-result" class="screen hidden">
+            <div class="verse-card">
+                <p id="verse-text" class="verse-text">"..."</p>
+                <p id="verse-ref" class="verse-ref">-</p>
+            </div>
+
+            <div class="actions" style="margin-top: var(--sp-xl); display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-sm);">
+                <button id="btn-favorite" class="btn-ghost">♡ Save</button>
+                <button id="btn-copy" class="btn-ghost">⎘ Copy</button>
+                <button id="btn-another" class="btn-primary" style="margin-left: var(--sp-md);">Another verse</button>
+            </div>
+            
+            <div style="margin-top: var(--sp-2xl);">
+                <button id="btn-restart" class="btn-ghost">Start Over</button>
+            </div>
+            
+            <div style="margin-top: auto; font-size: 0.75rem; color: var(--text-muted);">
+                A gentle creation by <a href="https://www.linkedin.com/in/beingbabu/" target="_blank" style="color: inherit;">Babu George</a>
+            </div>
+        </div>
+
+        <!-- ================= FAVORITES SCREEN ================= -->
+        <div id="screen-favorites" class="screen hidden" style="justify-content: flex-start; padding-top: var(--sp-2xl);">
+            <h2>Saved Verses</h2>
+            <div id="favorites-list" style="width: 100%; text-align: left; margin-bottom: var(--sp-xl); flex-grow: 1; overflow-y: auto;">
+                <!-- Favorites rendered here -->
+            </div>
+            <button id="btn-back-home" class="btn-ghost" style="margin-top: auto;">← Back</button>
+        </div>
+
+        <!-- ================= SETTINGS SCREEN ================= -->
+        <div id="screen-settings" class="screen hidden" style="justify-content: flex-start; padding-top: var(--sp-2xl);">
+            <h2>Settings</h2>
+            
+            <div style="width: 100%; text-align: left; margin-bottom: var(--sp-xl); display: flex; flex-direction: column; gap: var(--sp-lg);">
+                <div class="setting-group">
+                    <label style="font-weight: 500; display: block; margin-bottom: var(--sp-sm);">Meditation Pause</label>
+                    <select id="setting-duration" style="width: 100%; padding: var(--sp-sm); border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--card-bg); font-family: inherit; font-size: 1rem;">
+                        <option value="5">5 Seconds</option>
+                        <option value="10">10 Seconds</option>
+                        <option value="15">15 Seconds</option>
+                    </select>
+                </div>
+
+                <div class="setting-group">
+                    <label style="font-weight: 500; display: block; margin-bottom: var(--sp-sm);">Testament Preference</label>
+                    <select id="setting-testament" style="width: 100%; padding: var(--sp-sm); border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--card-bg); font-family: inherit; font-size: 1rem;">
+                        <option value="Both">Both (Old & New)</option>
+                        <option value="OT">Old Testament Only</option>
+                        <option value="NT">New Testament Only</option>
+                    </select>
+                </div>
+
+                <div class="setting-group" style="margin-top: var(--sp-xl);">
+                    <button id="btn-clear-data" class="btn-ghost" style="color: #c95c5c; padding: 0;">Danger: Clear all local data</button>
+                </div>
+            </div>
+
+            <button id="btn-close-settings" class="btn-ghost" style="margin-top: auto;">← Back</button>
+        </div>
+
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
