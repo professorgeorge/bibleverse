@@ -22,7 +22,10 @@
         
         <!-- ================= WELCOME SCREEN ================= -->
         <div id="screen-welcome" class="screen">
-            <button id="btn-settings" class="btn-ghost" style="position: absolute; top: var(--sp-lg); right: var(--sp-lg); font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;">⚙</button>
+            <div style="position: absolute; top: var(--sp-lg); right: var(--sp-lg); display: flex; gap: var(--sp-sm);">
+                <button id="btn-audio-toggle" class="btn-ghost" style="font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;" aria-label="Toggle Audio">🔊</button>
+                <button id="btn-settings" class="btn-ghost" style="font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;" aria-label="Settings">⚙</button>
+            </div>
             <h1>Quiet Space</h1>
             <p class="subtitle">A pocket refuge for a gentle word of encouragement.</p>
             <div style="margin-top: var(--sp-2xl);">
@@ -46,12 +49,6 @@
                 <button id="btn-continue" class="btn-primary">Continue</button>
                 <button id="btn-skip" class="btn-ghost">Skip check-in</button>
             </div>
-        </div>
-
-        <!-- ================= PAUSE / MEDITATION SCREEN ================= -->
-        <div id="screen-pause" class="screen hidden">
-            <h2 id="pause-text" style="animation: pulse 3s infinite ease-in-out;">Be still...</h2>
-            <div class="breathing-circle"></div>
         </div>
 
         <!-- ================= SHUFFLE / DRAW SCREEN ================= -->
@@ -103,15 +100,6 @@
             
             <div style="width: 100%; text-align: left; margin-bottom: var(--sp-xl); display: flex; flex-direction: column; gap: var(--sp-lg);">
                 <div class="setting-group">
-                    <label style="font-weight: 500; display: block; margin-bottom: var(--sp-sm);">Meditation Pause</label>
-                    <select id="setting-duration" style="width: 100%; padding: var(--sp-sm); border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--card-bg); font-family: inherit; font-size: 1rem;">
-                        <option value="5">5 Seconds</option>
-                        <option value="10">10 Seconds</option>
-                        <option value="15">15 Seconds</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
                     <label style="font-weight: 500; display: block; margin-bottom: var(--sp-sm);">Testament Preference</label>
                     <select id="setting-testament" style="width: 100%; padding: var(--sp-sm); border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--card-bg); font-family: inherit; font-size: 1rem;">
                         <option value="Both">Both (Old & New)</option>
@@ -129,6 +117,12 @@
         </div>
 
     </div>
+
+    <!-- Background Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="./assets/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <script type="module" src="./js/app.js"></script>
     <script>

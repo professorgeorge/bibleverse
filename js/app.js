@@ -13,16 +13,16 @@ const appState = {
 const screens = {
   welcome: document.getElementById('screen-welcome'),
   checkin: document.getElementById('screen-checkin'),
-  pause: document.getElementById('screen-pause'),
   shuffle: document.getElementById('screen-shuffle'),
   result: document.getElementById('screen-result'),
   favorites: document.getElementById('screen-favorites'),
   settings: document.getElementById('screen-settings')
 };
 
-// Check-in
+// Check-in and Audio
 const emotionChipsContainer = document.getElementById('emotion-chips');
 const btnStart = document.getElementById('btn-start');
+const btnAudioToggle = document.getElementById('btn-audio-toggle');
 const btnContinueCheckin = document.getElementById('btn-continue');
 const btnSkipCheckin = document.getElementById('btn-skip');
 
@@ -45,9 +45,13 @@ const favoritesList = document.getElementById('favorites-list');
 // Settings Navigation
 const btnSettings = document.getElementById('btn-settings');
 const btnCloseSettings = document.getElementById('btn-close-settings');
-const selectDuration = document.getElementById('setting-duration');
 const selectTestament = document.getElementById('setting-testament');
 const btnClearData = document.getElementById('btn-clear-data');
+
+// Audio Element
+const bgMusic = document.getElementById('bg-music');
+let isAudioPlaying = false; // Track if we've successfully started audio
+let hasInteracted = false; // Track first interaction for autoplay policy
 
 // --- NAVIGATION LOGIC ---
 function navigateTo(screenId) {
@@ -78,17 +82,6 @@ async function onScreenEnter(screenId) {
   if (screenId === 'checkin') {
     renderChips();
   }
-  else if (screenId === 'pause') {
-    const settings = getSettings();
-    const duration = settings.meditationDuration * 1000;
-    
-    // Automatically advance after meditation duration
-    setTimeout(() => {
-      if (appState.currentScreen === 'pause') {
-        navigateTo('shuffle');
-      }
-    }, duration);
-  }
   else if (screenId === 'result') {
     renderVerse();
   }
@@ -97,14 +90,69 @@ async function onScreenEnter(screenId) {
   }
 }
 
+// --- AUDIO LOGIC ---
+function attemptPlayAudio() {
+  if (!appState.settings) appState.settings = getSettings();
+  
+  if (!appState.settings.musicMuted && !isAudioPlaying && bgMusic) {
+    bgMusic.play().then(() => {
+      isAudioPlaying = true;
+      updateAudioToggleIcon();
+    }).catch(err => {
+      console.log("Audio play failed or blocked by browser: ", err);
+    });
+  }
+}
+
+function updateAudioToggleIcon() {
+  if (!appState.settings) return;
+  btnAudioToggle.textContent = appState.settings.musicMuted ? '🔇' : '🔊';
+}
+
+function handleFirstInteraction() {
+  if (!hasInteracted) {
+    hasInteracted = true;
+    attemptPlayAudio();
+    // Remove listeners once interacted
+    document.removeEventListener('click', handleFirstInteraction);
+    document.removeEventListener('touchstart', handleFirstInteraction);
+  }
+}
+
+// Listen for any interaction anywhere to start audio seamlessly
+document.addEventListener('click', handleFirstInteraction);
+document.addEventListener('touchstart', handleFirstInteraction);
+
 // --- EVENT LISTENERS ---
-btnStart.addEventListener('click', () => navigateTo('checkin'));
+btnStart.addEventListener('click', () => {
+    attemptPlayAudio(); // Double check on start button
+    navigateTo('checkin');
+});
+btnAudioToggle.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent triggering document interaction if clicking toggle first
+  if (!appState.settings) appState.settings = getSettings();
+  
+  appState.settings.musicMuted = !appState.settings.musicMuted;
+  import('./store.js').then(store => store.saveSettings(appState.settings));
+  
+  updateAudioToggleIcon();
+  
+  if (appState.settings.musicMuted) {
+    bgMusic.pause();
+    isAudioPlaying = false;
+  } else {
+    bgMusic.play().then(() => {
+       isAudioPlaying = true;
+    }).catch(e => console.log(e));
+  }
+});
+
 btnSkipCheckin.addEventListener('click', () => {
   appState.selectedThemes = [];
-  navigateTo('pause');
+  navigateTo('shuffle');
 });
 btnContinueCheckin.addEventListener('click', () => {
-  navigateTo('pause');
+  navigateTo('shuffle');
 });
 
 // Draw interactions
@@ -116,7 +164,7 @@ btnDraw.addEventListener('click', () => {
 });
 
 // Result interactions
-btnAnother.addEventListener('click', () => navigateTo('pause'));
+btnAnother.addEventListener('click', () => navigateTo('shuffle'));
 btnRestart.addEventListener('click', () => {
   appState.selectedThemes = [];
   navigateTo('welcome');
@@ -150,17 +198,11 @@ btnBackHome.addEventListener('click', () => navigateTo('welcome'));
 // Settings Interactions
 btnSettings.addEventListener('click', () => {
   appState.settings = getSettings();
-  selectDuration.value = appState.settings.meditationDuration;
   selectTestament.value = appState.settings.testamentPreference;
   navigateTo('settings');
 });
 btnCloseSettings.addEventListener('click', () => {
   navigateTo('welcome');
-});
-
-selectDuration.addEventListener('change', (e) => {
-  appState.settings.meditationDuration = parseInt(e.target.value);
-  import('./store.js').then(store => store.saveSettings(appState.settings));
 });
 
 selectTestament.addEventListener('change', (e) => {
@@ -231,6 +273,12 @@ function renderFavorites() {
 
 // --- BOOTSTRAP ---
 async function bootstrap() {
+  appState.settings = getSettings();
+  updateAudioToggleIcon();
+  if (appState.settings.musicMuted) {
+      bgMusic.pause();
+  }
+  
   await initEngine();
   // Ensure we start on welcome
   Object.values(screens).forEach(s => s.classList.add('hidden'));

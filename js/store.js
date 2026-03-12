@@ -5,10 +5,10 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_SETTINGS = {
-  meditationDuration: 10,
   testamentPreference: 'Both',
   reducedAnimation: false,
-  darkMode: false // Alternatively, can rely purely on system preference
+  darkMode: false, // Alternatively, can rely purely on system preference
+  musicMuted: false
 };
 
 // --- SETTINGS ---

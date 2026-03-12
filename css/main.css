@@ -250,26 +250,7 @@ button {
    Special Components
    ========================================================================== */
 
-/* Breathing Circle */
-.breathing-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-color) 0%, rgba(164,180,155,0) 70%);
-  margin: var(--sp-xl) auto;
-  opacity: 0.6;
-  animation: breathe 8s infinite ease-in-out;
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(0.8); opacity: 0.4; }
-  50% { transform: scale(1.5); opacity: 0.8; }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
+/* Removed Breathing Circle animations */
 
 /* Draw Card */
 .draw-card {
