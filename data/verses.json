@@ -137,6 +137,181 @@
     "reference": "Revelation 21:4",
     "text": "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away.",
     "testament": "NT",
-    "themes": ["Hope", "Sadness", "Healing"]
+    "themes": ["Hope", "Sadness", "Healing", "Grief"]
+  },
+  {
+    "id": "v21",
+    "reference": "Psalm 61:2",
+    "text": "From the ends of the earth I call to you, I call as my heart grows faint; lead me to the rock that is higher than I.",
+    "testament": "OT",
+    "themes": ["Overwhelmed", "Exhaustion", "Despair"]
+  },
+  {
+    "id": "v22",
+    "reference": "Matthew 28:20",
+    "text": "And surely I am with you always, to the very end of the age.",
+    "testament": "NT",
+    "themes": ["Loneliness", "Comfort", "Assurance"]
+  },
+  {
+    "id": "v23",
+    "reference": "Psalm 147:3",
+    "text": "He heals the brokenhearted and binds up their wounds.",
+    "testament": "OT",
+    "themes": ["Grief", "Healing", "Sadness"]
+  },
+  {
+    "id": "v24",
+    "reference": "Mark 9:24",
+    "text": "Immediately the boy’s father exclaimed, 'I do believe; help me overcome my unbelief!'",
+    "testament": "NT",
+    "themes": ["Doubt", "Honesty", "Faith"]
+  },
+  {
+    "id": "v25",
+    "reference": "Exodus 14:14",
+    "text": "The Lord will fight for you; you need only to be still.",
+    "testament": "OT",
+    "themes": ["Exhaustion", "Overwhelmed", "Rest", "Burnout"]
+  },
+  {
+    "id": "v26",
+    "reference": "2 Corinthians 12:9",
+    "text": "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.'",
+    "testament": "NT",
+    "themes": ["Weakness", "Burnout", "Strength", "Insecurity"]
+  },
+  {
+    "id": "v27",
+    "reference": "Psalm 27:14",
+    "text": "Wait for the Lord; be strong and take heart and wait for the Lord.",
+    "testament": "OT",
+    "themes": ["Waiting", "Impatience", "Hope"]
+  },
+  {
+    "id": "v28",
+    "reference": "James 1:5",
+    "text": "If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.",
+    "testament": "NT",
+    "themes": ["Confusion", "Direction", "Decision"]
+  },
+  {
+    "id": "v29",
+    "reference": "Psalm 18:28",
+    "text": "You, Lord, keep my lamp burning; my God turns my darkness into light.",
+    "testament": "OT",
+    "themes": ["Depression", "Despair", "Hope"]
+  },
+  {
+    "id": "v30",
+    "reference": "John 16:33",
+    "text": "I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.",
+    "testament": "NT",
+    "themes": ["Trouble", "Anxiety", "Peace", "Courage"]
+  },
+  {
+    "id": "v31",
+    "reference": "Psalm 73:26",
+    "text": "My flesh and my heart may fail, but God is the strength of my heart and my portion forever.",
+    "testament": "OT",
+    "themes": ["Weakness", "Failure", "Strength"]
+  },
+  {
+    "id": "v32",
+    "reference": "Romans 8:26",
+    "text": "In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us through wordless groans.",
+    "testament": "NT",
+    "themes": ["Weakness", "Exhaustion", "Speechless"]
+  },
+  {
+    "id": "v33",
+    "reference": "Isaiah 43:2",
+    "text": "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you. When you walk through the fire, you will not be burned.",
+    "testament": "OT",
+    "themes": ["Overwhelmed", "Danger", "Fear", "Protection"]
+  },
+  {
+    "id": "v34",
+    "reference": "1 John 4:18",
+    "text": "There is no fear in love. But perfect love drives out fear, because fear has to do with punishment. The one who fears is not made perfect in love.",
+    "testament": "NT",
+    "themes": ["Fear", "Insecurity", "Love"]
+  },
+  {
+    "id": "v35",
+    "reference": "Psalm 55:22",
+    "text": "Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.",
+    "testament": "OT",
+    "themes": ["Burden", "Anxiety", "Support"]
+  },
+  {
+    "id": "v36",
+    "reference": "Matthew 6:25-26",
+    "text": "Is not life more than food, and the body more than clothes? Look at the birds of the air... Your heavenly Father feeds them. Are you not much more valuable than they?",
+    "testament": "NT",
+    "themes": ["Insecurity", "Worry", "Value", "Provision"]
+  },
+  {
+    "id": "v37",
+    "reference": "Lamentations 3:25",
+    "text": "The Lord is good to those whose hope is in him, to the one who seeks him.",
+    "testament": "OT",
+    "themes": ["Hope", "Waiting", "Goodness"]
+  },
+  {
+    "id": "v38",
+    "reference": "Hebrews 4:16",
+    "text": "Let us then approach God’s throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need.",
+    "testament": "NT",
+    "themes": ["Need", "Guilt", "Shame", "Grace"]
+  },
+  {
+    "id": "v39",
+    "reference": "Psalm 139:7-10",
+    "text": "Where can I go from your Spirit? Where can I flee from your presence? If I go up to the heavens, you are there; if I make my bed in the depths, you are there.",
+    "testament": "OT",
+    "themes": ["Loneliness", "Presence", "Escapism"]
+  },
+  {
+    "id": "v40",
+    "reference": "Philippians 1:6",
+    "text": "Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus.",
+    "testament": "NT",
+    "themes": ["Doubt", "Insecurity", "Growth", "Confidence"]
+  },
+  {
+    "id": "v41",
+    "reference": "Isaiah 26:3",
+    "text": "You will keep in perfect peace those whose minds are steadfast, because they trust in you.",
+    "testament": "OT",
+    "themes": ["Peace", "Distraction", "Focus"]
+  },
+  {
+    "id": "v42",
+    "reference": "Matthew 5:4",
+    "text": "Blessed are those who mourn, for they will be comforted.",
+    "testament": "NT",
+    "themes": ["Grief", "Mourning", "Sadness"]
+  },
+  {
+    "id": "v43",
+    "reference": "Psalm 42:11",
+    "text": "Why, my soul, are you downcast? Why so disturbed within me? Put your hope in God, for I will yet praise him, my Savior and my God.",
+    "testament": "OT",
+    "themes": ["Depression", "Despair", "Hope"]
+  },
+  {
+    "id": "v44",
+    "reference": "Romans 12:2",
+    "text": "Do not conform to the pattern of this world, but be transformed by the renewing of your mind.",
+    "testament": "NT",
+    "themes": ["Renewal", "Direction", "Growth"]
+  },
+  {
+    "id": "v45",
+    "reference": "Psalm 94:19",
+    "text": "When anxiety was great within me, your consolation brought me joy.",
+    "testament": "OT",
+    "themes": ["Anxiety", "Joy", "Comfort"]
   }
 ]

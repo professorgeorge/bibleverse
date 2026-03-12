@@ -91,16 +91,26 @@ async function onScreenEnter(screenId) {
 }
 
 // --- AUDIO LOGIC ---
+let playPromise = null;
+
 function attemptPlayAudio() {
   if (!appState.settings) appState.settings = getSettings();
   
   if (!appState.settings.musicMuted && !isAudioPlaying && bgMusic) {
-    bgMusic.play().then(() => {
-      isAudioPlaying = true;
-      updateAudioToggleIcon();
-    }).catch(err => {
-      console.log("Audio play failed or blocked by browser: ", err);
-    });
+    if (playPromise !== null) return; // Already attempting to play
+    
+    playPromise = bgMusic.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isAudioPlaying = true;
+        updateAudioToggleIcon();
+        playPromise = null;
+      }).catch(err => {
+        console.log("Audio play failed: ", err);
+        playPromise = null;
+      });
+    }
   }
 }
 
@@ -125,7 +135,6 @@ document.addEventListener('touchstart', handleFirstInteraction);
 
 // --- EVENT LISTENERS ---
 btnStart.addEventListener('click', () => {
-    attemptPlayAudio(); // Double check on start button
     navigateTo('checkin');
 });
 btnAudioToggle.addEventListener('click', (e) => {
@@ -141,9 +150,7 @@ btnAudioToggle.addEventListener('click', (e) => {
     bgMusic.pause();
     isAudioPlaying = false;
   } else {
-    bgMusic.play().then(() => {
-       isAudioPlaying = true;
-    }).catch(e => console.log(e));
+    attemptPlayAudio();
   }
 });
 
