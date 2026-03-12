@@ -5,7 +5,6 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_SETTINGS = {
-  testamentPreference: 'Both',
   reducedAnimation: false,
   darkMode: false, // Alternatively, can rely purely on system preference
   musicMuted: false

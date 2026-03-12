@@ -20,26 +20,18 @@
 <body>
     <div id="app" class="app-container">
         
-        <!-- ================= WELCOME SCREEN ================= -->
-        <div id="screen-welcome" class="screen">
-            <div style="position: absolute; top: var(--sp-lg); right: var(--sp-lg); display: flex; gap: var(--sp-sm);">
+        <!-- ================= CHECK-IN (HOME) SCREEN ================= -->
+        <div id="screen-checkin" class="screen hidden">
+            <div style="position: absolute; top: var(--sp-lg); right: var(--sp-lg); display: flex; gap: var(--sp-sm); z-index: 10;">
                 <button id="btn-audio-toggle" class="btn-ghost" style="font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;" aria-label="Toggle Audio">🔊</button>
                 <button id="btn-settings" class="btn-ghost" style="font-size: 1.5rem; line-height: 1; padding: 0.5rem; text-transform:none;" aria-label="Settings">⚙</button>
             </div>
-            <h1>Quiet Space</h1>
-            <p class="subtitle">A pocket refuge for a gentle word of encouragement.</p>
-            <div style="margin-top: var(--sp-2xl);">
-                <button id="btn-start" class="btn-primary">Take a breath</button>
-            </div>
-            <div style="margin-top: var(--sp-lg);">
-                <button id="btn-favorites" class="btn-ghost">View Favorites</button>
-            </div>
-        </div>
+            
+            <h1 style="margin-bottom: var(--sp-xs);">Quiet Space</h1>
+            <p class="subtitle" style="margin-bottom: var(--sp-xl);">A pocket refuge for a gentle word of encouragement.</p>
 
-        <!-- ================= CHECK-IN SCREEN ================= -->
-        <div id="screen-checkin" class="screen hidden">
-            <h2>How are you feeling?</h2>
-            <p class="subtitle">Select what you're carrying right now, or simply skip.</p>
+            <h2 style="font-size: 1.3rem; margin-bottom: var(--sp-sm); margin-top: var(--sp-lg);">How are you feeling?</h2>
+            <p class="subtitle" style="font-size: 0.95rem;">Select what you're carrying right now, or simply skip.</p>
             
             <div id="emotion-chips" class="chips-container">
                 <!-- Chips will be generated here -->
@@ -99,15 +91,6 @@
             <h2>Settings</h2>
             
             <div style="width: 100%; text-align: left; margin-bottom: var(--sp-xl); display: flex; flex-direction: column; gap: var(--sp-lg);">
-                <div class="setting-group">
-                    <label style="font-weight: 500; display: block; margin-bottom: var(--sp-sm);">Testament Preference</label>
-                    <select id="setting-testament" style="width: 100%; padding: var(--sp-sm); border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--card-bg); font-family: inherit; font-size: 1rem;">
-                        <option value="Both">Both (Old & New)</option>
-                        <option value="OT">Old Testament Only</option>
-                        <option value="NT">New Testament Only</option>
-                    </select>
-                </div>
-
                 <div class="setting-group" style="margin-top: var(--sp-xl);">
                     <button id="btn-clear-data" class="btn-ghost" style="color: #c95c5c; padding: 0;">Danger: Clear all local data</button>
                 </div>

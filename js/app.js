@@ -3,7 +3,7 @@ import { getSettings, isFavorite, toggleFavorite, getFavorites } from './store.j
 
 // --- STATE ---
 const appState = {
-  currentScreen: 'welcome',
+  currentScreen: 'checkin',
   selectedThemes: [],
   currentVerse: null,
   settings: null
@@ -11,7 +11,6 @@ const appState = {
 
 // --- DOM ELEMENTS ---
 const screens = {
-  welcome: document.getElementById('screen-welcome'),
   checkin: document.getElementById('screen-checkin'),
   shuffle: document.getElementById('screen-shuffle'),
   result: document.getElementById('screen-result'),
@@ -21,7 +20,6 @@ const screens = {
 
 // Check-in and Audio
 const emotionChipsContainer = document.getElementById('emotion-chips');
-const btnStart = document.getElementById('btn-start');
 const btnAudioToggle = document.getElementById('btn-audio-toggle');
 const btnContinueCheckin = document.getElementById('btn-continue');
 const btnSkipCheckin = document.getElementById('btn-skip');
@@ -38,14 +36,13 @@ const btnAnother = document.getElementById('btn-another');
 const btnRestart = document.getElementById('btn-restart');
 
 // Favorites
-const btnViewFavorites = document.getElementById('btn-favorites');
+const btnViewFavorites = document.createElement('button'); // Kept for logic simplicity, moved to Checkin later if needed, but removed from UI
 const btnBackHome = document.getElementById('btn-back-home');
 const favoritesList = document.getElementById('favorites-list');
 
 // Settings Navigation
 const btnSettings = document.getElementById('btn-settings');
 const btnCloseSettings = document.getElementById('btn-close-settings');
-const selectTestament = document.getElementById('setting-testament');
 const btnClearData = document.getElementById('btn-clear-data');
 
 // Audio Element
@@ -134,9 +131,6 @@ document.addEventListener('click', handleFirstInteraction);
 document.addEventListener('touchstart', handleFirstInteraction);
 
 // --- EVENT LISTENERS ---
-btnStart.addEventListener('click', () => {
-    navigateTo('checkin');
-});
 btnAudioToggle.addEventListener('click', (e) => {
   e.stopPropagation(); // prevent triggering document interaction if clicking toggle first
   if (!appState.settings) appState.settings = getSettings();
@@ -165,8 +159,7 @@ btnContinueCheckin.addEventListener('click', () => {
 // Draw interactions
 btnDraw.addEventListener('click', () => {
   // Pick a verse and transition
-  const pref = getSettings().testamentPreference;
-  appState.currentVerse = getRandomVerse(appState.selectedThemes, pref);
+  appState.currentVerse = getRandomVerse(appState.selectedThemes, 'Both');
   navigateTo('result');
 });
 
@@ -174,7 +167,7 @@ btnDraw.addEventListener('click', () => {
 btnAnother.addEventListener('click', () => navigateTo('shuffle'));
 btnRestart.addEventListener('click', () => {
   appState.selectedThemes = [];
-  navigateTo('welcome');
+  navigateTo('checkin');
 });
 
 btnFavorite.addEventListener('click', () => {
@@ -199,22 +192,16 @@ btnCopy.addEventListener('click', async () => {
 });
 
 // Favorites Navigation
-btnViewFavorites.addEventListener('click', () => navigateTo('favorites'));
-btnBackHome.addEventListener('click', () => navigateTo('welcome'));
+// btnViewFavorites.addEventListener('click', () => navigateTo('favorites')); // Removed from UI
+btnBackHome.addEventListener('click', () => navigateTo('checkin'));
 
 // Settings Interactions
 btnSettings.addEventListener('click', () => {
   appState.settings = getSettings();
-  selectTestament.value = appState.settings.testamentPreference;
   navigateTo('settings');
 });
 btnCloseSettings.addEventListener('click', () => {
-  navigateTo('welcome');
-});
-
-selectTestament.addEventListener('change', (e) => {
-  appState.settings.testamentPreference = e.target.value;
-  import('./store.js').then(store => store.saveSettings(appState.settings));
+  navigateTo('checkin');
 });
 
 btnClearData.addEventListener('click', () => {
@@ -287,9 +274,10 @@ async function bootstrap() {
   }
   
   await initEngine();
-  // Ensure we start on welcome
+  // Ensure we start on checkin
   Object.values(screens).forEach(s => s.classList.add('hidden'));
-  screens.welcome.classList.remove('hidden');
+  screens.checkin.classList.remove('hidden');
+  renderChips();
 }
 
 document.addEventListener('DOMContentLoaded', bootstrap);
